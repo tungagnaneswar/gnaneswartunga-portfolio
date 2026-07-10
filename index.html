@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" class="">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gnaneswar Tunga — Full-Stack Software Developer</title>
+    <meta name="description" content="Gnaneswar Tunga (Eshwar) is a full-stack software developer building reliable, well-engineered systems end to end — from React interfaces to Spring Boot backends." />
+    <meta name="author" content="Gnaneswar Tunga" />
+    <meta property="og:title" content="Gnaneswar Tunga — Full-Stack Software Developer" />
+    <meta property="og:description" content="I build reliable, well-engineered systems end to end — from React interfaces to Spring Boot backends." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Gnaneswar Tunga — Full-Stack Software Developer" />
+    <meta name="twitter:description" content="I build reliable, well-engineered systems end to end — from React interfaces to Spring Boot backends." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      // Apply dark class before paint to avoid FOUC
+      (function () {
+        const stored = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (stored === 'dark' || (!stored && prefersDark)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
