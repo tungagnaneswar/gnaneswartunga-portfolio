@@ -2,10 +2,10 @@ export const siteData = {
   name: 'Gnaneswar Tunga',
   nickname: 'Eshwar',
   title: 'Full-Stack Software Developer',
-  pitch: 'I build reliable, well-engineered systems end to end — from React interfaces to Spring Boot backends.',
+  pitch: 'I build reliable, well-engineered systems end to end from React interfaces to Spring Boot backends.',
   location: 'Hyderabad, India',
-  email: 'gnaneswartunga@gmail.com',
-  github: 'https://github.com/gnaneswartunga',
+  email: 'tungagnaneswar12@gmail.com',
+  github: 'https://github.com/tungagnaneswar',
   linkedin: 'https://linkedin.com/in/gnaneswartunga',
   resume: '#',
 } as const;
@@ -26,7 +26,7 @@ export type SkillGroup = {
 export const skills: SkillGroup[] = [
   {
     category: 'Languages',
-    items: ['Java', 'TypeScript', 'JavaScript', 'SQL'],
+    items: ['Java', 'TypeScript', 'JavaScript', 'Structured Query Language(SQL)'],
   },
   {
     category: 'Backend',
@@ -38,15 +38,15 @@ export const skills: SkillGroup[] = [
   },
   {
     category: 'Database',
-    items: ['PostgreSQL', 'RocksDB'],
+    items: ['PostgreSQL', 'MongoDB'],
   },
   {
     category: 'Cloud / DevOps',
-    items: ['Microsoft Azure', 'Docker', 'Prometheus', 'Grafana'],
+    items: ['Docker', 'AWS', 'Git & GitHub'],
   },
   {
     category: 'Concepts',
-    items: ['REST API Design', 'System Design', 'Distributed Systems (Raft)', 'JWT Auth', 'SOLID Principles'],
+    items: ['REST API Design', 'System Design', 'Distributed Systems (Raft)', 'JWT Auth', 'SOLID Principles', 'Load Balancing', 'Microservices', 'Data Structures & Algorithms'],
   },
 ];
 
@@ -57,9 +57,20 @@ export type Project = {
   github: string;
   demo?: string;
   featured?: boolean;
+  isActive?: boolean;
 };
 
 export const projects: Project[] = [
+  {
+    title: 'Schema Vault',
+    description:
+      'A database schema management tool that helps you compare demo and production environments and highlight differences. It supports both PostgreSQL and MySQL.',
+    tags: ['Java', 'Spring Boot', 'Spring Security', 'Swagger UI', 'Docker', 'PostgreSQL', 'MySQL', 'React', 'TypeScript'],
+    github: '#',
+    demo: '#',
+    featured: true,
+    isActive: true,
+  },
   {
     title: 'Distributed Key-Value Store',
     description:
@@ -68,6 +79,7 @@ export const projects: Project[] = [
     github: '#',
     demo: '#',
     featured: true,
+    isActive: true,
   },
   {
     title: 'Smart Inventory & Billing Manager',
@@ -77,35 +89,36 @@ export const projects: Project[] = [
     github: '#',
     demo: '#',
     featured: true,
+    isActive: false,
   },
   {
     title: 'Fleet Management System',
     description:
       'End-to-end fleet tracking and management system with real-time status updates and role-based access control.',
-    tags: ['Java', 'Spring Boot', 'React', 'PostgreSQL'],
+    tags: ['Node.js', 'Express.js', 'React', 'TypeScript', 'Tailwind CSS', 'PostgreSQL'],
     github: '#',
+    featured: true,
+    isActive: true,
   },
   {
     title: 'Preserve Platform',
     description:
       'A digital preservation platform enabling users to archive, organize, and securely share personal media collections.',
-    tags: ['Node.js', 'Express.js', 'React', 'PostgreSQL'],
+    tags: ['Node.js', 'Express.js', 'React', 'TypeScript', 'Tailwind CSS', 'PostgreSQL'],
     github: '#',
+    featured: true,
+    isActive: true,
   },
   {
     title: 'Sales Savvy',
     description:
       'A sales analytics and CRM dashboard providing actionable insights through clean data visualizations and pipeline tracking.',
-    tags: ['React', 'TypeScript', 'Node.js', 'PostgreSQL'],
+    tags: ['Java', 'Spring Boot', 'React', 'MySQL', 'REST API', 'JWT Auth'],
     github: '#',
-  },
-  {
-    title: 'Milk Dairy Management System',
-    description:
-      'Comprehensive dairy operations management covering inventory, vendor records, billing, and daily production logs.',
-    tags: ['Java', 'Spring Boot', 'PostgreSQL', 'React'],
-    github: '#',
-  },
+    demo: '#',
+    featured: true,
+    isActive: false,
+  }
 ];
 
 export type ExperienceItem = {
@@ -118,9 +131,9 @@ export type ExperienceItem = {
 
 export const experience: ExperienceItem[] = [
   {
-    company: 'eArbor',
+    company: 'eArbor LLP',
     role: 'Full-Stack Software Developer',
-    period: '2024 — Present',
+    period: 'Aug 2025 - Present',
     location: 'Hyderabad, India',
     bullets: [
       'Design and implement RESTful APIs in Java / Spring Boot, collaborating with cross-functional teams to deliver features from schema to UI.',
@@ -129,14 +142,15 @@ export const experience: ExperienceItem[] = [
     ],
   },
   {
-    company: 'Kodnest',
+    company: 'KodNest Technologies Pvt. Ltd.',
     role: 'Java Full Stack Intern',
-    period: 'Aug 2024 — Mar 2025',
-    location: 'India',
+    period: 'Aug 2024 - Mar 2025',
+    location: 'Bangalore, India',
     bullets: [
-      'Built end-to-end web applications during an intensive Java full-stack training program.',
-      'Developed backend services and RESTful APIs utilizing Java and Spring Boot.',
-      'Created responsive, user-friendly frontend interfaces using React and Tailwind CSS.',
+      'Completed an intensive Java full-stack development program covering backend, frontend, database, and cloud technologies.',
+      'Gained hands-on experience with Spring Boot, React.js, MySQL.',
+      'Participated in hackathons and coding challenges, developing problem-solving skills and collaborative development practices.',
+      'Built and deployed multiple full-stack projects, demonstrating proficiency in the complete software development lifecycle.',
     ],
   },
 ];

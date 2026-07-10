@@ -1,6 +1,6 @@
 import { siteData } from '../data/content';
 import { Code2, Link, FileText, ArrowDown } from 'lucide-react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { useRef, ReactNode } from 'react';
 
 // Magnetic Button Wrapper

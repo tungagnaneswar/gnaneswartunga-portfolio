@@ -100,7 +100,7 @@ export function Projects() {
         </h2>
       </div>
       <div className="grid sm:grid-cols-2 gap-4">
-        {projects.map((project, i) => (
+        {projects.filter(project => project.isActive).map((project, i) => (
           <ProjectCard key={project.title} project={project} index={i} />
         ))}
       </div>
