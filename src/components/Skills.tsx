@@ -1,7 +1,7 @@
 import { skills } from '../data/content';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { motion } from 'framer-motion';
-import { Code, Database, Globe, Server, Cloud, Cpu, Star, Layers, Sparkles } from 'lucide-react';
+import { Star, Layers, Sparkles } from 'lucide-react';
 
 const icons = [Star, Layers, Sparkles];
 

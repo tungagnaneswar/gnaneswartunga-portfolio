@@ -1,5 +1,5 @@
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { Terminal, MapPin, Hammer, Crosshair, Coffee } from 'lucide-react';
+import { Terminal } from 'lucide-react';
 
 export function Personality() {
   const { ref, isVisible } = useScrollReveal<HTMLElement>();

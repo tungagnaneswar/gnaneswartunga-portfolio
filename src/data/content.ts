@@ -7,7 +7,7 @@ export const siteData = {
   email: 'tungagnaneswar12@gmail.com',
   github: 'https://github.com/tungagnaneswar',
   linkedin: 'https://linkedin.com/in/gnaneswartunga',
-  resume: '#',
+  resume: 'https://drive.google.com/file/d/1KvWJommSnJOZt-rmG0T6Iw8F5u-2nqry/view?usp=sharing',
 } as const;
 
 export const about = {

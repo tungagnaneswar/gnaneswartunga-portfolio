@@ -1,8 +1,6 @@
-import { siteData } from '../data/content';
+
 
 export function Footer() {
-  const year = new Date().getFullYear();
-
   return (
     <footer className="border-t border-stone-200/60 dark:border-stone-800/60 py-8 px-6 sm:px-8">
       <div className="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
