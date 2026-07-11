@@ -1,7 +1,7 @@
 export const siteData = {
   name: 'Building reliable software.',
   nickname: 'Gnaneswar',
-  title: 'Full Stack Engineer focused on Java, Spring Boot and building reliable backend systems.',
+  title: 'Focused on Java, Spring Boot and understanding production-scale systems.',
   pitch: 'Building reliable software.',
   location: 'Hyderabad, India',
   email: 'tungagnaneswar12@gmail.com',
@@ -14,7 +14,7 @@ export const about = {
   paragraphs: [
     "I'm a full-stack engineer working at eArbor in Hyderabad. I spend my days designing REST APIs, structuring PostgreSQL schemas, and hooking everything up to React frontends.",
     "My journey formally started at Sri Venkateswara Engineering College, followed by intensive full-stack training. Over time, I've grown a deep appreciation for the entire stack — especially the backend. Java, Spring Boot, and Node.js are where I feel most at home.",
-    "I'm currently spending most of my free time learning Java internals, distributed systems, and building Gnanadhan. I want to build software that lasts, solves real problems, and scales elegantly.",
+    "I'm currently spending most of my free time learning Java internals, distributed systems, and building Gnanadhan. I enjoy understanding how systems work internally, from JVM behavior to distributed systems.",
   ],
 };
 
@@ -38,21 +38,15 @@ export const skills: SkillGroup[] = [
   },
 ];
 
-export type ProjectScreenshot = {
-  label: string;
-  placeholder: string; // description for when real screenshot is added
-};
-
 export type Project = {
   title: string;
+  number: string;
   description: string;
   badge: 'PROFESSIONAL' | 'PERSONAL';
   tags: string[];
   github?: string;
   demo?: string;
   featured?: boolean;
-  isActive?: boolean;
-  screenshots?: ProjectScreenshot[];
   caseStudy?: {
     why: string;
     problem: string;
@@ -72,11 +66,11 @@ export const currentlyBuilding = {
 export const projects: Project[] = [
   {
     title: 'Property Management Platform',
+    number: '01',
     badge: 'PROFESSIONAL',
     description: 'Implemented production modules including real-time notifications, PostgreSQL schema design and responsive React interfaces.',
     tags: ['React.js', 'Spring Boot', 'PostgreSQL', 'Java'],
     featured: true,
-    isActive: true,
     features: [
       'Designed PostgreSQL schemas and robust REST APIs.',
       'Built production-ready React interfaces with reusable components.',
@@ -86,11 +80,11 @@ export const projects: Project[] = [
   },
   {
     title: 'Fleet Management System',
+    number: '02',
     badge: 'PROFESSIONAL',
     description: 'Engineered a real-time fleet tracking system to solve legacy polling issues. Integrated WebSockets for live status updates and optimized PostgreSQL databases for scale.',
     tags: ['Node.js', 'Express.js', 'React', 'TypeScript', 'Socket.IO', 'PostgreSQL'],
     featured: true,
-    isActive: true,
     features: [
       'Implemented Socket.IO real-time notifications, replacing legacy polling.',
       'Designed scalable PostgreSQL database schemas and API endpoints.',
@@ -100,13 +94,13 @@ export const projects: Project[] = [
   },
   {
     title: 'Milk Manager',
+    number: '03',
     badge: 'PERSONAL',
     description: 'Built for my father\'s dairy business to replace manual paper tracking. Provides a mobile-friendly dashboard for daily milk logging and automated monthly billing reports.',
-    tags: ['React', 'TypeScript', 'Node.js', 'Tailwind CSS'],
+    tags: ['React', 'TypeScript', 'Supabase', 'Tailwind CSS'],
     github: '#',
     demo: '#',
     featured: true,
-    isActive: true,
     features: [
       'Customer management module',
       'Daily milk tracking dashboard',
@@ -122,13 +116,12 @@ export const projects: Project[] = [
   },
   {
     title: 'Schema Vault',
+    number: '04',
     badge: 'PERSONAL',
     description: 'Developed a comparison engine to detect database schema drift between local and production environments, solving the problem of silent deployment bugs.',
     tags: ['Java', 'Spring Boot', 'Docker', 'PostgreSQL', 'React', 'TypeScript'],
     github: '#',
     demo: '#',
-    featured: false,
-    isActive: true,
     caseStudy: {
       why: 'I repeatedly faced issues keeping local and production databases synced without paying for expensive tools.',
       problem: 'Database schema drift causes silent bugs that are hard to trace and break production deployments.',

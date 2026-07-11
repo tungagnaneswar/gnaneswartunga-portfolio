@@ -55,13 +55,13 @@ export function Contact() {
               className="group flex items-center gap-4 p-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900/50 hover:border-stone-300 dark:hover:border-stone-700 transition-all duration-200 card-hover"
             >
               <div className="w-10 h-10 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center shrink-0 group-hover:bg-amber-50 dark:group-hover:bg-amber-500/10 transition-colors">
-                <Mail size={17} className="text-stone-500 dark:text-stone-400 group-hover:text-amber-700 dark:group-hover:text-amber-500 transition-colors" />
+                <Mail size={17} className="text-stone-600 dark:text-stone-300 group-hover:text-amber-700 dark:group-hover:text-amber-500 transition-colors" />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-[11px] font-semibold tracking-wider uppercase text-stone-400 dark:text-stone-600">Email</p>
                 <p className="text-sm font-medium text-stone-800 dark:text-stone-200 truncate">{siteData.email}</p>
               </div>
-              <ArrowUpRight size={16} className="text-stone-300 dark:text-stone-700 group-hover:text-stone-500 dark:group-hover:text-stone-400 transition-colors shrink-0" />
+              <ArrowUpRight size={16} className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-300 transition-colors shrink-0" />
             </a>
 
             <a
@@ -70,16 +70,16 @@ export function Contact() {
               rel="noopener noreferrer"
               data-cursor="tooltip"
               data-cursor-text="Download"
-              className="group flex items-center gap-4 p-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900/50 hover:border-stone-300 dark:hover:border-stone-700 transition-all duration-200 card-hover"
+              className="group flex items-center gap-4 p-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-stone-50/50 dark:bg-stone-800/20 hover:border-stone-300 dark:hover:border-stone-700 transition-all duration-200 card-hover"
             >
-              <div className="w-10 h-10 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center shrink-0 group-hover:bg-amber-50 dark:group-hover:bg-amber-500/10 transition-colors">
-                <FileText size={17} className="text-stone-500 dark:text-stone-400 group-hover:text-amber-700 dark:group-hover:text-amber-500 transition-colors" />
+              <div className="w-10 h-10 rounded-lg bg-white dark:bg-stone-800 flex items-center justify-center shrink-0 group-hover:bg-amber-50 dark:group-hover:bg-amber-500/10 transition-colors border border-stone-100 dark:border-stone-700/50">
+                <FileText size={17} className="text-amber-600/90 dark:text-amber-500/90 group-hover:text-amber-700 dark:group-hover:text-amber-500 transition-colors" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-[11px] font-semibold tracking-wider uppercase text-stone-400 dark:text-stone-600">Resume</p>
-                <p className="text-sm font-medium text-stone-800 dark:text-stone-200 truncate">View & Download</p>
+                <p className="text-[11px] font-semibold tracking-wider uppercase text-stone-500 dark:text-stone-500">Resume</p>
+                <p className="text-[14.5px] font-medium text-stone-900 dark:text-stone-100 truncate">View & Download Resume (PDF)</p>
               </div>
-              <ArrowUpRight size={16} className="text-stone-300 dark:text-stone-700 group-hover:text-stone-500 dark:group-hover:text-stone-400 transition-colors shrink-0" />
+              <ArrowUpRight size={16} className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-300 transition-colors shrink-0" />
             </a>
 
             <a
@@ -91,13 +91,13 @@ export function Contact() {
               className="group flex items-center gap-4 p-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900/50 hover:border-stone-300 dark:hover:border-stone-700 transition-all duration-200 card-hover"
             >
               <div className="w-10 h-10 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center shrink-0 group-hover:bg-amber-50 dark:group-hover:bg-amber-500/10 transition-colors">
-                <Code2 size={17} className="text-stone-500 dark:text-stone-400 group-hover:text-amber-700 dark:group-hover:text-amber-500 transition-colors" />
+                <Code2 size={17} className="text-stone-600 dark:text-stone-300 group-hover:text-amber-700 dark:group-hover:text-amber-500 transition-colors" />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-[11px] font-semibold tracking-wider uppercase text-stone-400 dark:text-stone-600">GitHub</p>
                 <p className="text-sm font-medium text-stone-800 dark:text-stone-200 truncate">github.com/gnaneswartunga</p>
               </div>
-              <ArrowUpRight size={16} className="text-stone-300 dark:text-stone-700 group-hover:text-stone-500 dark:group-hover:text-stone-400 transition-colors shrink-0" />
+              <ArrowUpRight size={16} className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-300 transition-colors shrink-0" />
             </a>
 
             <a
@@ -109,13 +109,13 @@ export function Contact() {
               className="group flex items-center gap-4 p-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900/50 hover:border-stone-300 dark:hover:border-stone-700 transition-all duration-200 card-hover"
             >
               <div className="w-10 h-10 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center shrink-0 group-hover:bg-amber-50 dark:group-hover:bg-amber-500/10 transition-colors">
-                <Link size={17} className="text-stone-500 dark:text-stone-400 group-hover:text-amber-700 dark:group-hover:text-amber-500 transition-colors" />
+                <Link size={17} className="text-stone-600 dark:text-stone-300 group-hover:text-amber-700 dark:group-hover:text-amber-500 transition-colors" />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-[11px] font-semibold tracking-wider uppercase text-stone-400 dark:text-stone-600">LinkedIn</p>
                 <p className="text-sm font-medium text-stone-800 dark:text-stone-200 truncate">linkedin.com/in/gnaneswartunga</p>
               </div>
-              <ArrowUpRight size={16} className="text-stone-300 dark:text-stone-700 group-hover:text-stone-500 dark:group-hover:text-stone-400 transition-colors shrink-0" />
+              <ArrowUpRight size={16} className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-300 transition-colors shrink-0" />
             </a>
           </div>
         </div>

@@ -107,14 +107,14 @@ export function Hero() {
             initial="hidden"
             animate="visible"
             custom={0.7}
-            className="flex flex-wrap gap-2 mb-8 md:mb-10 max-w-2xl"
+            className="flex flex-wrap gap-2.5 mb-8 md:mb-10 max-w-2xl"
           >
             {[
               "1+ Years Experience",
               "10+ Projects Built",
               "Building Gnanadhan"
             ].map((meta, i) => (
-              <span key={i} className="px-3 py-1.5 rounded-lg border border-stone-200 dark:border-stone-800 bg-white/40 dark:bg-stone-900/40 backdrop-blur text-[11px] font-medium tracking-wide text-stone-600 dark:text-stone-400">
+              <span key={i} className="px-3.5 py-2 rounded-lg border border-stone-200 dark:border-stone-800 bg-white/40 dark:bg-stone-900/40 backdrop-blur text-xs font-medium tracking-wide text-stone-600 dark:text-stone-400">
                 {meta}
               </span>
             ))}
@@ -128,11 +128,11 @@ export function Hero() {
             custom={0.8}
             className="mb-8 md:mb-10"
           >
-            <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-stone-400 dark:text-stone-500 mb-3">Current Focus</p>
-            <ul className="space-y-2">
+            <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-stone-400 dark:text-stone-500 mb-4">Current Focus</p>
+            <ul className="space-y-3">
               {['Java Internals', 'System Design', 'Distributed Systems'].map((focus, i) => (
-                <li key={i} className="flex items-center gap-2 text-sm text-stone-600 dark:text-stone-400">
-                  <ChevronRight size={14} className="text-amber-600 dark:text-amber-500/70" />
+                <li key={i} className="flex items-center gap-2.5 text-[15px] text-stone-600 dark:text-stone-400">
+                  <ChevronRight size={15} className="text-amber-600 dark:text-amber-500/70" />
                   {focus}
                 </li>
               ))}
@@ -249,22 +249,6 @@ export function Hero() {
           </Magnetic>
         </motion.div>
       </div>
-
-      {/* Scroll cue */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-      >
-        <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-stone-400 dark:text-stone-600">Scroll</span>
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-        >
-          <ArrowDown size={14} className="text-stone-400 dark:text-stone-600" />
-        </motion.div>
-      </motion.div>
     </section>
   );
 }
