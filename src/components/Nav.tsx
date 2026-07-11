@@ -3,6 +3,7 @@ import { ThemeToggle } from './ThemeToggle';
 import { siteData } from '../data/content';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Magnetic } from './Magnetic';
 
 const navLinks = [
   { href: '#about', label: 'About' },
@@ -32,44 +33,53 @@ export function Nav() {
           : 'bg-transparent'
       }`}
     >
-      <nav className="max-w-6xl mx-auto px-6 sm:px-8 h-16 flex items-center justify-between" aria-label="Primary navigation">
+      <nav className="max-w-[1400px] mx-auto px-6 sm:px-8 h-16 flex items-center justify-between" aria-label="Primary navigation">
         {/* Wordmark */}
-        <a
-          href="#hero"
-          className="font-serif text-xl text-stone-900 dark:text-stone-50 tracking-tight hover:opacity-70 transition-opacity"
-        >
-          {siteData.nickname}
-          <span className="text-amber-700 dark:text-amber-500">.</span>
-        </a>
+        <Magnetic strength={0.1}>
+          <a
+            href="#hero"
+            className="font-serif text-2xl text-stone-900 dark:text-stone-50 tracking-tight hover:opacity-70 transition-opacity"
+            data-cursor="navbar"
+          >
+            {siteData.nickname}
+            <span className="text-amber-700 dark:text-amber-500">.</span>
+          </a>
+        </Magnetic>
 
         {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-7">
           {navLinks.map(link => (
             <li key={link.href}>
-              <a
-                href={link.href}
-                className="link-hover text-[13px] font-medium tracking-wide uppercase text-stone-500 dark:text-stone-500 hover:text-stone-900 dark:hover:text-stone-200 transition-colors duration-200"
-              >
-                {link.label}
-              </a>
+              <Magnetic strength={0.1}>
+                <a
+                  href={link.href}
+                  data-cursor="navbar"
+                  className="link-hover text-[13px] font-medium tracking-wide uppercase text-stone-500 dark:text-stone-500 hover:text-stone-900 dark:hover:text-stone-200 transition-colors duration-200 inline-block px-1 py-1"
+                >
+                  {link.label}
+                </a>
+              </Magnetic>
             </li>
           ))}
         </ul>
 
         <div className="flex items-center gap-2.5">
           <ThemeToggle />
-          <button
-            className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg border border-stone-200 dark:border-stone-800 bg-white/60 dark:bg-stone-900/60 backdrop-blur transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
-            onClick={() => setMenuOpen(prev => !prev)}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={menuOpen}
-          >
-            {menuOpen ? (
-              <X size={16} className="text-stone-600 dark:text-stone-300" />
-            ) : (
-              <Menu size={16} className="text-stone-600 dark:text-stone-300" />
-            )}
-          </button>
+          <Magnetic strength={0.1}>
+            <button
+              className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg border border-stone-200 dark:border-stone-800 bg-white/60 dark:bg-stone-900/60 backdrop-blur transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
+              onClick={() => setMenuOpen(prev => !prev)}
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+              data-cursor="button"
+            >
+              {menuOpen ? (
+                <X size={16} className="text-stone-600 dark:text-stone-300" />
+              ) : (
+                <Menu size={16} className="text-stone-600 dark:text-stone-300" />
+              )}
+            </button>
+          </Magnetic>
         </div>
       </nav>
 

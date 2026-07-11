@@ -14,8 +14,8 @@
 :root {
   --font-serif: 'Instrument Serif', Georgia, serif;
   --font-sans: 'Inter', system-ui, sans-serif;
-  --accent: #b45309;
-  --accent-light: #d97706;
+  --accent: #9a4708;
+  --accent-light: #b45309;
   --glow-color: rgba(217, 119, 6, 0.05);
   --glow-color-alt: rgba(180, 83, 9, 0.04);
 }
@@ -36,11 +36,11 @@ html {
 body {
   font-family: var(--font-sans);
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.75;
   font-weight: 400;
   letter-spacing: -0.011em;
   background-color: #fafaf9;
-  color: #292524;
+  color: #1c1917;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* Hide default cursor on desktop when using custom cursor */
@@ -49,6 +49,8 @@ body {
 
 @media (pointer: coarse) {
   body { cursor: auto; }
+  /* Disable ambient glow blur on touch for performance */
+  .ambient-glow { display: none; }
 }
 
 .dark body {
@@ -66,7 +68,7 @@ body {
     radial-gradient(circle at 20% 30%, var(--glow-color) 0%, transparent 40%),
     radial-gradient(circle at 80% 70%, var(--glow-color-alt) 0%, transparent 40%);
   filter: blur(60px);
-  opacity: 0.8;
+  opacity: 0.6;
   animation: ambient-drift 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -79,6 +81,15 @@ body {
 /* ─── Serif ──────────────────────────────────────────────────────────────── */
 .font-serif {
   font-family: var(--font-serif);
+}
+
+/* ─── Responsive Typography ──────────────────────────────────────────────── */
+.hero-heading {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+}
+
+.section-heading {
+  font-size: clamp(2rem, 6vw, 3rem);
 }
 
 /* ─── Animated link underline ────────────────────────────────────────────── */
@@ -217,4 +228,43 @@ section + section {
 
 a, button {
   cursor: none !important;
+}
+
+@media (pointer: coarse) {
+  a, button {
+    cursor: auto !important;
+  }
+  .card-hover {
+    cursor: pointer;
+  }
+  .link-hover {
+    cursor: auto;
+  }
+  .accent-link {
+    cursor: auto;
+  }
+}
+
+/* ─── Mobile layout improvements ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Reduce excessive section padding on mobile */
+  section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  /* Ensure 16px minimum body text */
+  body {
+    font-size: 1rem;
+  }
+
+  /* Skills grid: single column on mobile */
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* No horizontal overflow */
+  .max-w-\[1400px\] {
+    overflow-x: hidden;
+  }
 }

@@ -9,6 +9,7 @@ export function ThemeToggle() {
     <button
       onClick={toggle}
       aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+      data-cursor="hover"
       className="relative w-9 h-9 flex items-center justify-center rounded-lg border border-stone-200 dark:border-stone-800 hover:border-stone-400 dark:hover:border-stone-600 bg-white/60 dark:bg-stone-900/60 backdrop-blur transition-all duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
     >
       <AnimatePresence mode="wait" initial={false}>

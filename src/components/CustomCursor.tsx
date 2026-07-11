@@ -1,84 +1,188 @@
 import { useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
+
+type CursorVariant = 'default' | 'hover' | 'navbar' | 'tooltip';
 
 export function CustomCursor() {
-  const [isHovering, setIsHovering] = useState(false);
+  const [variant, setVariant] = useState<CursorVariant>('default');
+  const [text, setText] = useState('');
+  const [navWidth, setNavWidth] = useState(0);
+  const [disabled, setDisabled] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   
-  // Instant tracking values (Zero delay)
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
   
-  // Extremely tight, snappy spring for the trailing ring so it doesn't feel sluggish
-  const springConfig = { damping: 25, stiffness: 700, mass: 0.1 };
+  // Spring config requested: stiffness: 300, damping: 25, mass: 0.5
+  const springConfig = { damping: 25, stiffness: 300, mass: 0.5 };
   const smoothX = useSpring(cursorX, springConfig);
   const smoothY = useSpring(cursorY, springConfig);
 
   useEffect(() => {
-    // Disable entirely on touch devices
-    if (window.matchMedia("(pointer: coarse)").matches) return;
+    // Disable on touch devices and if prefers-reduced-motion
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    
+    if (isTouch || prefersReducedMotion) {
+      setDisabled(true);
+      return;
+    }
+
+    let rafId: number;
+    let targetX = -100;
+    let targetY = -100;
 
     const moveCursor = (e: MouseEvent) => {
-      // Set instantly on every frame
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
+      targetX = e.clientX;
+      targetY = e.clientY;
+      if (!isVisible) setIsVisible(true);
     };
+
+    const render = () => {
+      cursorX.set(targetX);
+      cursorY.set(targetY);
+      rafId = requestAnimationFrame(render);
+    };
+    rafId = requestAnimationFrame(render);
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      // Better detection: use closest to catch icons inside buttons/links
-      if (
+      
+      const cursorTarget = target.closest('[data-cursor]');
+      
+      if (cursorTarget) {
+        const type = cursorTarget.getAttribute('data-cursor') as CursorVariant;
+        const cursorText = cursorTarget.getAttribute('data-cursor-text') || '';
+        
+        setVariant(type);
+        setText(cursorText);
+
+        if (type === 'navbar') {
+          const rect = cursorTarget.getBoundingClientRect();
+          setNavWidth(rect.width + 24); // Add some padding
+        }
+      } else if (
         window.getComputedStyle(target).cursor === 'pointer' ||
         target.closest('a') ||
         target.closest('button')
       ) {
-        setIsHovering(true);
+        setVariant('hover');
+        setText('');
       } else {
-        setIsHovering(false);
+        setVariant('default');
+        setText('');
       }
+    };
+
+    const handleMouseLeave = () => {
+      setIsVisible(false);
     };
 
     window.addEventListener('mousemove', moveCursor);
     window.addEventListener('mouseover', handleMouseOver);
+    document.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
       window.removeEventListener('mousemove', moveCursor);
       window.removeEventListener('mouseover', handleMouseOver);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      cancelAnimationFrame(rafId);
     };
-  }, [cursorX, cursorY]);
+  }, [cursorX, cursorY, isVisible]);
+
+  if (disabled) return null;
+
+  const variants = {
+    default: {
+      width: 24,
+      height: 24,
+      backgroundColor: 'rgba(245, 158, 11, 0)',
+      borderColor: 'rgba(245, 158, 11, 0.5)',
+      boxShadow: '0 0 0px rgba(245, 158, 11, 0)',
+      borderRadius: '50%',
+    },
+    hover: {
+      width: 48,
+      height: 48,
+      backgroundColor: 'rgba(245, 158, 11, 0.05)',
+      borderColor: 'rgba(245, 158, 11, 0.2)',
+      boxShadow: '0 0 20px rgba(245, 158, 11, 0.2)',
+      borderRadius: '50%',
+    },
+    navbar: {
+      width: navWidth,
+      height: 42,
+      backgroundColor: 'rgba(245, 158, 11, 0.1)',
+      borderColor: 'rgba(245, 158, 11, 0)',
+      boxShadow: '0 0 0px rgba(245, 158, 11, 0)',
+      borderRadius: '9999px', // pill shape
+    },
+    tooltip: {
+      width: 80,
+      height: 36,
+      backgroundColor: 'rgba(28, 25, 23, 0.95)',
+      borderColor: 'rgba(68, 64, 60, 0.5)',
+      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+      borderRadius: '8px',
+    },
+  };
+
+  const textVariants = {
+    initial: { opacity: 0, scale: 0.5 },
+    animate: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 0.5 }
+  };
+
+  const showInnerDot = variant === 'default' || variant === 'hover' || variant === 'navbar';
 
   return (
     <>
-      {/* Outer trailing ring */}
+      {/* Outer shape */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 border-[1.5px] border-amber-500 rounded-full pointer-events-none z-[9999]"
+        className="fixed top-0 left-0 border-[1px] pointer-events-none z-[9999] flex items-center justify-center overflow-hidden"
         style={{
           x: smoothX,
           y: smoothY,
           translateX: '-50%',
           translateY: '-50%',
+          opacity: isVisible ? 1 : 0,
         }}
-        animate={{
-          scale: isHovering ? 1.8 : 1,
-          backgroundColor: isHovering ? 'rgba(245, 158, 11, 0.15)' : 'rgba(245, 158, 11, 0)',
-          borderColor: isHovering ? 'rgba(245, 158, 11, 0)' : 'rgba(245, 158, 11, 1)',
-        }}
-        transition={{ duration: 0.2, ease: 'easeOut' }}
-      />
+        variants={variants}
+        animate={variant}
+        transition={{ type: 'spring', damping: 25, stiffness: 300, mass: 0.5 }}
+      >
+        <AnimatePresence mode="wait">
+          {text && (
+            <motion.span
+              key={text}
+              variants={textVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={{ duration: 0.15 }}
+              className="text-[11px] font-semibold tracking-wide text-stone-100 capitalize"
+            >
+              {text}
+            </motion.span>
+          )}
+        </AnimatePresence>
+      </motion.div>
       
-      {/* Inner dot - Instant tracking (ZERO DELAY) */}
+      {/* Inner dot */}
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 bg-amber-500 rounded-full pointer-events-none z-[9999]"
+        className="fixed top-0 left-0 w-1.5 h-1.5 bg-amber-500 rounded-full pointer-events-none z-[9999]"
         style={{
-          x: cursorX,
-          y: cursorY,
+          x: smoothX, // Using smoothX instead of instant cursorX so it stays centered inside the morphing shape
+          y: smoothY,
           translateX: '-50%',
           translateY: '-50%',
+          opacity: isVisible ? 1 : 0,
         }}
         animate={{
-          scale: isHovering ? 0 : 1,
-          opacity: isHovering ? 0 : 1,
+          scale: showInnerDot ? 1 : 0,
+          opacity: showInnerDot && isVisible ? 1 : 0,
         }}
-        transition={{ duration: 0.15, ease: 'easeOut' }}
+        transition={{ duration: 0.2 }}
       />
     </>
   );

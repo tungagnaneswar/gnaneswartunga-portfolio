@@ -1,5 +1,5 @@
 import { siteData } from '../data/content';
-import { Code2, Link, Mail, ArrowUpRight } from 'lucide-react';
+import { Code2, Link, Mail, ArrowUpRight, FileText } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export function Contact() {
@@ -9,7 +9,7 @@ export function Contact() {
     <section
       id="contact"
       ref={ref}
-      className={`py-16 px-6 sm:px-8 max-w-6xl mx-auto transition-all duration-700 ${
+      className={`py-16 px-6 sm:px-8 max-w-[1400px] mx-auto transition-all duration-700 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
       }`}
     >
@@ -18,20 +18,40 @@ export function Contact() {
           <p className="section-label text-[11px] font-semibold tracking-[0.2em] uppercase text-stone-400 dark:text-stone-600 mb-3">
             Contact
           </p>
-          <h2 className="font-serif text-3xl sm:text-4xl text-stone-900 dark:text-stone-50">
+          <h2 className="font-serif text-3xl sm:text-4xl text-stone-900 dark:text-stone-50 mb-10">
             Let's connect<span className="text-amber-700 dark:text-amber-500">.</span>
           </h2>
+          
+          <div className="hidden md:block">
+            <p className="text-[11px] font-bold tracking-widest uppercase text-stone-400 dark:text-stone-500 mb-4">Available For</p>
+            <ul className="space-y-3">
+              {[
+                "Backend Engineer Roles",
+                "Full Stack Engineer Roles",
+                "Freelance Projects",
+                "Open Source Collaboration"
+              ].map((item, i) => (
+                <li key={i} className="flex items-center gap-3 text-sm text-stone-600 dark:text-stone-400">
+                  <div className="w-4 h-4 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                    <span className="text-[10px]">✓</span>
+                  </div>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
         <div>
           <p className="text-[15px] leading-[1.8] text-stone-600 dark:text-stone-400 mb-6">
-            I'm open to new opportunities, interesting problems, and good conversations about software.
-            Feel free to reach out — I'll get back to you promptly.
+            I'm always happy to discuss backend engineering, interesting products and opportunities where I can continue growing as an engineer.
           </p>
 
           {/* Contact cards */}
           <div className="space-y-2.5">
             <a
               href={`mailto:${siteData.email}`}
+              data-cursor="tooltip"
+              data-cursor-text="Copy"
               className="group flex items-center gap-4 p-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900/50 hover:border-stone-300 dark:hover:border-stone-700 transition-all duration-200 card-hover"
             >
               <div className="w-10 h-10 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center shrink-0 group-hover:bg-amber-50 dark:group-hover:bg-amber-500/10 transition-colors">
@@ -45,9 +65,29 @@ export function Contact() {
             </a>
 
             <a
+              href={siteData.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="tooltip"
+              data-cursor-text="Download"
+              className="group flex items-center gap-4 p-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900/50 hover:border-stone-300 dark:hover:border-stone-700 transition-all duration-200 card-hover"
+            >
+              <div className="w-10 h-10 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center shrink-0 group-hover:bg-amber-50 dark:group-hover:bg-amber-500/10 transition-colors">
+                <FileText size={17} className="text-stone-500 dark:text-stone-400 group-hover:text-amber-700 dark:group-hover:text-amber-500 transition-colors" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-[11px] font-semibold tracking-wider uppercase text-stone-400 dark:text-stone-600">Resume</p>
+                <p className="text-sm font-medium text-stone-800 dark:text-stone-200 truncate">View & Download</p>
+              </div>
+              <ArrowUpRight size={16} className="text-stone-300 dark:text-stone-700 group-hover:text-stone-500 dark:group-hover:text-stone-400 transition-colors shrink-0" />
+            </a>
+
+            <a
               href={siteData.github}
               target="_blank"
               rel="noopener noreferrer"
+              data-cursor="tooltip"
+              data-cursor-text="Open"
               className="group flex items-center gap-4 p-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900/50 hover:border-stone-300 dark:hover:border-stone-700 transition-all duration-200 card-hover"
             >
               <div className="w-10 h-10 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center shrink-0 group-hover:bg-amber-50 dark:group-hover:bg-amber-500/10 transition-colors">
@@ -64,6 +104,8 @@ export function Contact() {
               href={siteData.linkedin}
               target="_blank"
               rel="noopener noreferrer"
+              data-cursor="tooltip"
+              data-cursor-text="Open"
               className="group flex items-center gap-4 p-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900/50 hover:border-stone-300 dark:hover:border-stone-700 transition-all duration-200 card-hover"
             >
               <div className="w-10 h-10 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center shrink-0 group-hover:bg-amber-50 dark:group-hover:bg-amber-500/10 transition-colors">

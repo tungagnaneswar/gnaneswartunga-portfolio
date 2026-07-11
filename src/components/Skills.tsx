@@ -1,9 +1,9 @@
 import { skills } from '../data/content';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { motion } from 'framer-motion';
-import { Code, Database, Globe, Server, Cloud, Cpu } from 'lucide-react';
+import { Code, Database, Globe, Server, Cloud, Cpu, Star, Layers, Sparkles } from 'lucide-react';
 
-const icons = [Code, Server, Globe, Database, Cloud, Cpu];
+const icons = [Star, Layers, Sparkles];
 
 export function Skills() {
   const { ref, isVisible } = useScrollReveal<HTMLElement>();
@@ -22,7 +22,7 @@ export function Skills() {
   };
 
   return (
-    <section id="skills" ref={ref} className="py-20 px-6 sm:px-8 max-w-6xl mx-auto">
+    <section id="skills" ref={ref} className="py-20 px-6 sm:px-8 max-w-[1400px] mx-auto">
       <div className="mb-12">
         <p className="section-label text-[11px] font-semibold tracking-[0.2em] uppercase text-stone-400 dark:text-stone-600 mb-3">
           Skills
@@ -36,24 +36,22 @@ export function Skills() {
         variants={container}
         initial="hidden"
         animate={isVisible ? 'show' : 'hidden'}
-        className="grid grid-cols-1 md:grid-cols-3 gap-4"
+        className="grid grid-cols-1 md:grid-cols-3 gap-6"
       >
         {skills.map((group, idx) => {
           const Icon = icons[idx % icons.length];
-          // Make the first and last items span 2 columns for a Bento look
-          const isWide = idx === 0 || idx === 5;
           
           return (
             <motion.div
               key={group.category}
               variants={item}
-              className={`bento-card p-6 flex flex-col gap-4 ${isWide ? 'md:col-span-2' : 'md:col-span-1'}`}
+              className="bento-card p-8 flex flex-col gap-6"
             >
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-600 dark:text-amber-500">
-                  <Icon size={16} />
+                <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-600 dark:text-amber-500">
+                  <Icon size={18} />
                 </div>
-                <h3 className="font-serif text-xl text-stone-900 dark:text-stone-100">
+                <h3 className="font-serif text-2xl text-stone-900 dark:text-stone-100">
                   {group.category}
                 </h3>
               </div>
