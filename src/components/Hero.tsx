@@ -1,5 +1,5 @@
 import { siteData } from '../data/content';
-import { Code2, Link, FileText, ArrowDown, ChevronRight, MapPin, Target } from 'lucide-react';
+import { Code2, Link, FileText, ChevronRight, MapPin, Target } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Magnetic } from './Magnetic';
 
