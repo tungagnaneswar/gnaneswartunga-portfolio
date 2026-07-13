@@ -50,8 +50,6 @@ export function Contact() {
           <div className="space-y-2.5">
             <a
               href={`mailto:${siteData.email}`}
-              data-cursor="tooltip"
-              data-cursor-text="Copy"
               className="group flex items-center gap-4 p-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900/50 hover:border-stone-300 dark:hover:border-stone-700 transition-all duration-200 card-hover"
             >
               <div className="w-10 h-10 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center shrink-0 group-hover:bg-amber-50 dark:group-hover:bg-amber-500/10 transition-colors">
@@ -68,8 +66,6 @@ export function Contact() {
               href={siteData.resume}
               target="_blank"
               rel="noopener noreferrer"
-              data-cursor="tooltip"
-              data-cursor-text="Download"
               className="group flex items-center gap-4 p-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-stone-50/50 dark:bg-stone-800/20 hover:border-stone-300 dark:hover:border-stone-700 transition-all duration-200 card-hover"
             >
               <div className="w-10 h-10 rounded-lg bg-white dark:bg-stone-800 flex items-center justify-center shrink-0 group-hover:bg-amber-50 dark:group-hover:bg-amber-500/10 transition-colors border border-stone-100 dark:border-stone-700/50">
@@ -86,8 +82,6 @@ export function Contact() {
               href={siteData.github}
               target="_blank"
               rel="noopener noreferrer"
-              data-cursor="tooltip"
-              data-cursor-text="Open"
               className="group flex items-center gap-4 p-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900/50 hover:border-stone-300 dark:hover:border-stone-700 transition-all duration-200 card-hover"
             >
               <div className="w-10 h-10 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center shrink-0 group-hover:bg-amber-50 dark:group-hover:bg-amber-500/10 transition-colors">
@@ -104,8 +98,6 @@ export function Contact() {
               href={siteData.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              data-cursor="tooltip"
-              data-cursor-text="Open"
               className="group flex items-center gap-4 p-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900/50 hover:border-stone-300 dark:hover:border-stone-700 transition-all duration-200 card-hover"
             >
               <div className="w-10 h-10 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center shrink-0 group-hover:bg-amber-50 dark:group-hover:bg-amber-500/10 transition-colors">

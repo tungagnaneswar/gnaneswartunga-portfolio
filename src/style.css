@@ -43,14 +43,10 @@ body {
   color: #1c1917;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Hide default cursor on desktop when using custom cursor */
-  cursor: none;
 }
 
 @media (pointer: coarse) {
   body { cursor: auto; }
-  /* Disable ambient glow blur on touch for performance */
-  .ambient-glow { display: none; }
 }
 
 .dark body {
@@ -96,7 +92,6 @@ body {
 .link-hover {
   position: relative;
   text-decoration: none;
-  cursor: none;
 }
 .link-hover::after {
   content: '';
@@ -116,7 +111,6 @@ body {
 .accent-link {
   color: var(--accent);
   transition: color 0.2s;
-  cursor: none;
 }
 .accent-link:hover {
   color: var(--accent-light);
@@ -164,7 +158,6 @@ section + section {
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
               box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
               border-color 0.25s;
-  cursor: none;
 }
 .card-hover:hover {
   transform: translateY(-2px);
@@ -247,18 +240,14 @@ a, button {
 }
 
 @media (pointer: coarse) {
-  a, button {
+  /* Restore all cursors on touch devices */
+  body, a, button, .link-hover, .accent-link, .card-hover {
     cursor: auto !important;
   }
   .card-hover {
-    cursor: pointer;
+    cursor: pointer !important;
   }
-  .link-hover {
-    cursor: auto;
-  }
-  .accent-link {
-    cursor: auto;
-  }
+  .ambient-glow { display: none; }
 }
 
 /* ─── Mobile layout improvements ─────────────────────────────────────────── */

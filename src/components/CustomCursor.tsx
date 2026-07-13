@@ -1,188 +1,200 @@
-import { useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
+/**
+ * CustomCursor
+ * ─────────────────────────────────────────────────────────────────
+ * Design: amber dot (6 px) + thin outer ring (28 px default / 44 px hover).
+ * Priority: smoothness > fancy. Works like Linear / Vercel / Apple cursors.
+ *
+ * Performance contract:
+ *  - Zero React state updates on every frame (motion values only).
+ *  - Single rAF loop drives both cursors.
+ *  - No box-shadow / filter / blur on the ring elements.
+ *  - Hover detection via delegated mouseover + data-cursor-hover attribute.
+ *
+ * Reliability contract:
+ *  - mouseleave on document + blur on window both reset hover + hide cursor.
+ *  - focus on window allows cursor to reappear on next mousemove.
+ *  - Disabled entirely on touch devices and when prefers-reduced-motion is set.
+ */
 
-type CursorVariant = 'default' | 'hover' | 'navbar' | 'tooltip';
+import { useEffect, useRef } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
+// ─── Constants ──────────────────────────────────────────────────────────────
+const DOT_SIZE    = 6;   // px — amber filled circle
+const RING_DEFAULT = 28; // px — outer ring diameter at rest
+const RING_HOVER   = 44; // px — outer ring diameter on interactive elements
+
+// Dot: very tight — feels glued to the real cursor
+const DOT_SPRING  = { stiffness: 900, damping: 50, mass: 0.2 };
+// Ring: slightly softer — trails just enough to add elegance
+const RING_SPRING = { stiffness: 600, damping: 40, mass: 0.4 };
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+function isTouchDevice(): boolean {
+  return window.matchMedia('(pointer: coarse)').matches;
+}
+
+function prefersReducedMotion(): boolean {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function isInteractive(el: HTMLElement): boolean {
+  if (el.closest('[data-cursor-hover]')) return true;
+  const tag = el.tagName.toLowerCase();
+  if (tag === 'a' || tag === 'button' || tag === 'label' || tag === 'select') return true;
+  if (el.closest('a') || el.closest('button')) return true;
+  return window.getComputedStyle(el).cursor === 'pointer';
+}
+
+// ─── Component ───────────────────────────────────────────────────────────────
 export function CustomCursor() {
-  const [variant, setVariant] = useState<CursorVariant>('default');
-  const [text, setText] = useState('');
-  const [navWidth, setNavWidth] = useState(0);
-  const [disabled, setDisabled] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
-  
-  // Spring config requested: stiffness: 300, damping: 25, mass: 0.5
-  const springConfig = { damping: 25, stiffness: 300, mass: 0.5 };
-  const smoothX = useSpring(cursorX, springConfig);
-  const smoothY = useSpring(cursorY, springConfig);
+  // Motion values — mutated directly, never trigger React re-renders
+  const mouseX = useMotionValue(-200);
+  const mouseY = useMotionValue(-200);
+
+  // Smooth spring position for the ring
+  const ringX = useSpring(mouseX, RING_SPRING);
+  const ringY = useSpring(mouseY, RING_SPRING);
+
+  // Dot follows raw position via a very tight spring
+  const dotX = useSpring(mouseX, DOT_SPRING);
+  const dotY = useSpring(mouseY, DOT_SPRING);
+
+  // Refs for imperative DOM mutations (avoids React re-renders)
+  const ringRef = useRef<HTMLDivElement>(null);
+  const dotRef  = useRef<HTMLDivElement>(null);
+
+  const isHovered = useRef(false);
+  const isVisible = useRef(false);
+  const rafId     = useRef<number>(0);
+
+  // Live mouse coordinates — written by mousemove, consumed by rAF
+  const liveX = useRef(-200);
+  const liveY = useRef(-200);
 
   useEffect(() => {
-    // Disable on touch devices and if prefers-reduced-motion
-    const isTouch = window.matchMedia("(pointer: coarse)").matches;
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    
-    if (isTouch || prefersReducedMotion) {
-      setDisabled(true);
+    // Guard: completely disable on touch / reduced-motion
+    if (isTouchDevice() || prefersReducedMotion()) {
+      document.body.style.cursor = '';
       return;
     }
 
-    let rafId: number;
-    let targetX = -100;
-    let targetY = -100;
+    // Hide the system cursor on desktop
+    document.body.style.cursor = 'none';
 
-    const moveCursor = (e: MouseEvent) => {
-      targetX = e.clientX;
-      targetY = e.clientY;
-      if (!isVisible) setIsVisible(true);
+    // ── Imperative helpers ────────────────────────────────────────────────
+    const setRingSize = (hover: boolean) => {
+      if (!ringRef.current) return;
+      const size = hover ? RING_HOVER : RING_DEFAULT;
+      ringRef.current.style.width  = `${size}px`;
+      ringRef.current.style.height = `${size}px`;
     };
 
-    const render = () => {
-      cursorX.set(targetX);
-      cursorY.set(targetY);
-      rafId = requestAnimationFrame(render);
+    const setVisibility = (visible: boolean) => {
+      if (!ringRef.current || !dotRef.current) return;
+      const v = visible ? '1' : '0';
+      ringRef.current.style.opacity = v;
+      dotRef.current.style.opacity  = v;
+      isVisible.current = visible;
     };
-    rafId = requestAnimationFrame(render);
 
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      
-      const cursorTarget = target.closest('[data-cursor]');
-      
-      if (cursorTarget) {
-        const type = cursorTarget.getAttribute('data-cursor') as CursorVariant;
-        const cursorText = cursorTarget.getAttribute('data-cursor-text') || '';
-        
-        setVariant(type);
-        setText(cursorText);
+    // ── rAF loop: push live coords into motion values ─────────────────────
+    const tick = () => {
+      mouseX.set(liveX.current);
+      mouseY.set(liveY.current);
+      rafId.current = requestAnimationFrame(tick);
+    };
+    rafId.current = requestAnimationFrame(tick);
 
-        if (type === 'navbar') {
-          const rect = cursorTarget.getBoundingClientRect();
-          setNavWidth(rect.width + 24); // Add some padding
-        }
-      } else if (
-        window.getComputedStyle(target).cursor === 'pointer' ||
-        target.closest('a') ||
-        target.closest('button')
-      ) {
-        setVariant('hover');
-        setText('');
-      } else {
-        setVariant('default');
-        setText('');
+    // ── Event: track mouse position ───────────────────────────────────────
+    const onMouseMove = (e: MouseEvent) => {
+      liveX.current = e.clientX;
+      liveY.current = e.clientY;
+      if (!isVisible.current) setVisibility(true);
+    };
+
+    // ── Event: hover detection via delegation ─────────────────────────────
+    const onMouseOver = (e: MouseEvent) => {
+      const hover = isInteractive(e.target as HTMLElement);
+      if (hover !== isHovered.current) {
+        isHovered.current = hover;
+        setRingSize(hover);
       }
     };
 
-    const handleMouseLeave = () => {
-      setIsVisible(false);
+    const resetHover = () => {
+      if (isHovered.current) {
+        isHovered.current = false;
+        setRingSize(false);
+      }
     };
 
-    window.addEventListener('mousemove', moveCursor);
-    window.addEventListener('mouseover', handleMouseOver);
-    document.addEventListener('mouseleave', handleMouseLeave);
+    // ── Event: cursor leaves the document ────────────────────────────────
+    const onMouseLeave = () => {
+      resetHover();
+      setVisibility(false);
+      liveX.current = -200;
+      liveY.current = -200;
+    };
+
+    // ── Event: window loses focus (tab switch, alt-tab) ───────────────────
+    const onWindowBlur = () => {
+      resetHover();
+      setVisibility(false);
+    };
+
+    // ── Attach all listeners ──────────────────────────────────────────────
+    window.addEventListener('mousemove',    onMouseMove,  { passive: true });
+    window.addEventListener('mouseover',    onMouseOver,  { passive: true });
+    document.addEventListener('mouseleave', onMouseLeave);
+    window.addEventListener('blur',         onWindowBlur);
 
     return () => {
-      window.removeEventListener('mousemove', moveCursor);
-      window.removeEventListener('mouseover', handleMouseOver);
-      document.removeEventListener('mouseleave', handleMouseLeave);
-      cancelAnimationFrame(rafId);
+      cancelAnimationFrame(rafId.current);
+      window.removeEventListener('mousemove',    onMouseMove);
+      window.removeEventListener('mouseover',    onMouseOver);
+      document.removeEventListener('mouseleave', onMouseLeave);
+      window.removeEventListener('blur',         onWindowBlur);
+      document.body.style.cursor = '';
     };
-  }, [cursorX, cursorY, isVisible]);
-
-  if (disabled) return null;
-
-  const variants = {
-    default: {
-      width: 24,
-      height: 24,
-      backgroundColor: 'rgba(245, 158, 11, 0)',
-      borderColor: 'rgba(245, 158, 11, 0.5)',
-      boxShadow: '0 0 0px rgba(245, 158, 11, 0)',
-      borderRadius: '50%',
-    },
-    hover: {
-      width: 48,
-      height: 48,
-      backgroundColor: 'rgba(245, 158, 11, 0.05)',
-      borderColor: 'rgba(245, 158, 11, 0.2)',
-      boxShadow: '0 0 20px rgba(245, 158, 11, 0.2)',
-      borderRadius: '50%',
-    },
-    navbar: {
-      width: navWidth,
-      height: 42,
-      backgroundColor: 'rgba(245, 158, 11, 0.1)',
-      borderColor: 'rgba(245, 158, 11, 0)',
-      boxShadow: '0 0 0px rgba(245, 158, 11, 0)',
-      borderRadius: '9999px', // pill shape
-    },
-    tooltip: {
-      width: 80,
-      height: 36,
-      backgroundColor: 'rgba(28, 25, 23, 0.95)',
-      borderColor: 'rgba(68, 64, 60, 0.5)',
-      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-      borderRadius: '8px',
-    },
-  };
-
-  const textVariants = {
-    initial: { opacity: 0, scale: 0.5 },
-    animate: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 0.5 }
-  };
-
-  const showInnerDot = variant === 'default' || variant === 'hover' || variant === 'navbar';
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
-      {/* Outer shape */}
+      {/* ── Outer ring ─────────────────────────────────────────────────── */}
       <motion.div
-        className="fixed top-0 left-0 border-[1px] pointer-events-none z-[9999] flex items-center justify-center overflow-hidden"
+        ref={ringRef}
+        aria-hidden="true"
         style={{
-          x: smoothX,
-          y: smoothY,
+          x: ringX,
+          y: ringY,
           translateX: '-50%',
           translateY: '-50%',
-          opacity: isVisible ? 1 : 0,
+          width:  RING_DEFAULT,
+          height: RING_DEFAULT,
+          // CSS transition for size changes (driven imperatively)
+          transition: 'width 0.15s cubic-bezier(0.4,0,0.2,1), height 0.15s cubic-bezier(0.4,0,0.2,1), opacity 0.2s',
+          opacity: 0,
         }}
-        variants={variants}
-        animate={variant}
-        transition={{ type: 'spring', damping: 25, stiffness: 300, mass: 0.5 }}
-      >
-        <AnimatePresence mode="wait">
-          {text && (
-            <motion.span
-              key={text}
-              variants={textVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              transition={{ duration: 0.15 }}
-              className="text-[11px] font-semibold tracking-wide text-stone-100 capitalize"
-            >
-              {text}
-            </motion.span>
-          )}
-        </AnimatePresence>
-      </motion.div>
-      
-      {/* Inner dot */}
+        className="fixed top-0 left-0 rounded-full border border-amber-500/50 pointer-events-none z-[9999] will-change-transform"
+      />
+
+      {/* ── Inner amber dot ──────────────────────────────────────────────── */}
       <motion.div
-        className="fixed top-0 left-0 w-1.5 h-1.5 bg-amber-500 rounded-full pointer-events-none z-[9999]"
+        ref={dotRef}
+        aria-hidden="true"
         style={{
-          x: smoothX, // Using smoothX instead of instant cursorX so it stays centered inside the morphing shape
-          y: smoothY,
+          x: dotX,
+          y: dotY,
           translateX: '-50%',
           translateY: '-50%',
-          opacity: isVisible ? 1 : 0,
+          width:  DOT_SIZE,
+          height: DOT_SIZE,
+          transition: 'opacity 0.2s',
+          opacity: 0,
         }}
-        animate={{
-          scale: showInnerDot ? 1 : 0,
-          opacity: showInnerDot && isVisible ? 1 : 0,
-        }}
-        transition={{ duration: 0.2 }}
+        className="fixed top-0 left-0 rounded-full bg-amber-500 pointer-events-none z-[9999] will-change-transform"
       />
     </>
   );

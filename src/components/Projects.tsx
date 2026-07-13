@@ -110,7 +110,6 @@ function FeaturedProject({ project }: { project: Project }) {
   return (
     <motion.article
       ref={ref}
-      data-cursor="hover"
       className={`card-hover group relative py-6 px-8 sm:py-8 sm:px-10 rounded-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900/50 mb-8 transition-all duration-700 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
       }`}
@@ -183,7 +182,6 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <motion.article
       ref={ref}
-      data-cursor="hover"
       className={`card-hover group relative flex flex-col p-7 rounded-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900/50 h-full transition-all duration-700 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
       }`}

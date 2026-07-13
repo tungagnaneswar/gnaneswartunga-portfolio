@@ -172,8 +172,6 @@ export function Hero() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="GitHub profile"
-                  data-cursor="tooltip"
-                  data-cursor-text="GitHub"
                   className="w-10 h-10 flex items-center justify-center rounded-full bg-stone-100 dark:bg-stone-800 text-stone-500 dark:text-stone-400 hover:text-amber-700 dark:hover:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-500/10 transition-colors duration-300"
                 >
                   <Code2 size={18} />
@@ -185,8 +183,6 @@ export function Hero() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn profile"
-                  data-cursor="tooltip"
-                  data-cursor-text="LinkedIn"
                   className="w-10 h-10 flex items-center justify-center rounded-full bg-stone-100 dark:bg-stone-800 text-stone-500 dark:text-stone-400 hover:text-amber-700 dark:hover:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-500/10 transition-colors duration-300"
                 >
                   <Link size={18} />
@@ -198,8 +194,6 @@ export function Hero() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Download resume"
-                  data-cursor="tooltip"
-                  data-cursor-text="Resume"
                   className="w-10 h-10 flex items-center justify-center rounded-full bg-stone-100 dark:bg-stone-800 text-stone-500 dark:text-stone-400 hover:text-amber-700 dark:hover:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-500/10 transition-colors duration-300"
                 >
                   <FileText size={18} />

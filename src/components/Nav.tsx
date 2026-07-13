@@ -39,7 +39,7 @@ export function Nav() {
           <a
             href="#hero"
             className="font-serif text-2xl text-stone-900 dark:text-stone-50 tracking-tight hover:opacity-70 transition-opacity"
-            data-cursor="navbar"
+            data-cursor-hover
           >
             {siteData.nickname}
             <span className="text-amber-700 dark:text-amber-500">.</span>
@@ -53,7 +53,6 @@ export function Nav() {
               <Magnetic strength={0.1}>
                 <a
                   href={link.href}
-                  data-cursor="navbar"
                   className="link-hover text-[13px] font-medium tracking-wide uppercase text-stone-500 dark:text-stone-500 hover:text-stone-900 dark:hover:text-stone-200 transition-colors duration-200 inline-block px-1 py-1"
                 >
                   {link.label}
@@ -71,7 +70,6 @@ export function Nav() {
               onClick={() => setMenuOpen(prev => !prev)}
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={menuOpen}
-              data-cursor="button"
             >
               {menuOpen ? (
                 <X size={16} className="text-stone-600 dark:text-stone-300" />
