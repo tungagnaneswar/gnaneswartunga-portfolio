@@ -235,9 +235,6 @@ section + section {
   opacity: 0.4;
 }
 
-a, button {
-  cursor: none !important;
-}
 
 @media (pointer: coarse) {
   /* Restore all cursors on touch devices */

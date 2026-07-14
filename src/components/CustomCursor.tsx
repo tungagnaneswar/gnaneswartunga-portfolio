@@ -79,8 +79,8 @@ export function CustomCursor() {
       return;
     }
 
-    // Hide the system cursor on desktop
-    document.body.style.cursor = 'none';
+    // Show the system cursor along with the custom cursor
+    document.body.style.cursor = 'auto';
 
     // ── Imperative helpers ────────────────────────────────────────────────
     const setRingSize = (hover: boolean) => {
