@@ -1,6 +1,6 @@
 export const siteData = {
   name: 'Building reliable software.',
-  nickname: 'Gnaneswar',
+  nickname: 'Gnaneswar Tunga',
   title: 'Focused on Java, Spring Boot and understanding production-scale systems.',
   pitch: 'Building reliable software.',
   location: 'Hyderabad, India',
