@@ -1,41 +1,8 @@
-import { projects, currentlyBuilding } from '../data/content';
+import { projects } from '../data/content';
 import type { Project } from '../data/content';
 import { Code2, ExternalLink } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { motion } from 'framer-motion';
-
-/* ─── Currently Building — quiet inline note ───────────────────────────── */
-function CurrentlyBuildingNote() {
-  const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
-
-  return (
-    <div
-      ref={ref}
-      className={`mt-16 pt-8 border-t border-stone-200 dark:border-stone-800/60 transition-all duration-700 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-      }`}
-    >
-      <div className="flex items-center gap-3">
-        <span className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-          <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-stone-400 dark:text-stone-500">
-            Currently Building
-          </span>
-        </span>
-        <span className="text-stone-300 dark:text-stone-700">—</span>
-        <span className="text-[15px] text-stone-700 dark:text-stone-300 font-medium">
-          {currentlyBuilding.title}
-        </span>
-      </div>
-      <p className="mt-2 text-[14px] text-stone-500 dark:text-stone-400 leading-relaxed max-w-2xl pl-[18px]">
-        {currentlyBuilding.description}
-        <span className="ml-2 text-[12px] text-stone-400 dark:text-stone-600">
-          · {currentlyBuilding.status}
-        </span>
-      </p>
-    </div>
-  );
-}
 
 /* ─── Case Study — amber-bordered aside ────────────────────────────────── */
 function CaseStudyBlock({ caseStudy }: { caseStudy: NonNullable<Project['caseStudy']> }) {
@@ -122,7 +89,7 @@ function FeaturedProject({ project }: { project: Project }) {
       <div className="relative z-10">
         {/* Badge */}
         <span className="inline-flex items-center gap-1.5 text-[9px] font-bold tracking-[0.15em] uppercase text-stone-500 dark:text-stone-400 mb-4">
-          <span>{project.badge === 'PROFESSIONAL' ? '🏢' : '🏠'}</span>
+          <span>{project.badge === 'PROFESSIONAL' ? '💼' : '🔬'}</span>
           {project.badge}
         </span>
 
@@ -195,7 +162,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       <div className="relative z-10 flex flex-col h-full">
         {/* Badge */}
         <span className="inline-flex items-center gap-1.5 self-start text-[9px] font-bold tracking-[0.15em] uppercase text-stone-500 dark:text-stone-400 mb-3">
-          <span>{project.badge === 'PROFESSIONAL' ? '🏢' : '🏠'}</span>
+          <span>{project.badge === 'PROFESSIONAL' ? '💼' : '🔬'}</span>
           {project.badge}
         </span>
 
@@ -289,8 +256,6 @@ export function Projects() {
         ))}
       </div>
 
-      {/* Currently Building — quiet note */}
-      <CurrentlyBuildingNote />
     </section>
   );
 }

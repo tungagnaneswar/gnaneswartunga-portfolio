@@ -40,7 +40,7 @@ export function Hero() {
       id="hero"
       className="relative min-h-[90vh] flex items-center px-6 sm:px-8 pt-16 sm:pt-24 pb-12 sm:pb-16 max-w-[1400px] mx-auto"
     >
-      <div className="grid md:grid-cols-[1.2fr_1fr] gap-8 md:gap-20 items-center w-full">
+      <div className="grid md:grid-cols-[1.2fr_1fr] gap-8 md:gap-12 items-center w-full">
         {/* Left — text content */}
         <div className="order-1 md:order-1">
           {/* Cinematic Text Reveal */}
@@ -69,12 +69,7 @@ export function Hero() {
                 <img
                   src="/profile.jpeg"
                   alt={`Portrait of ${siteData.nickname}`}
-                  className="w-full h-full object-cover dark:hidden"
-                />
-                <img
-                  src="/whiteshirt-profile.jpeg"
-                  alt={`Portrait of ${siteData.nickname}`}
-                  className="w-full h-full object-cover hidden dark:block"
+                  className="w-full h-full object-cover"
                 />
               </div>
               {/* Meta labels — mobile */}
@@ -96,54 +91,55 @@ export function Hero() {
             initial="hidden"
             animate="visible"
             custom={0.6}
-            className="text-base md:text-xl text-stone-600 dark:text-stone-300 leading-relaxed max-w-xl mb-8 md:mb-10"
+            className="text-base md:text-xl text-stone-600 dark:text-stone-300 leading-relaxed max-w-2xl mb-6 md:mb-8"
           >
             {siteData.title}
           </motion.p>
 
-          {/* Meta Cards */}
+          {/* Two-column Info Section */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             animate="visible"
             custom={0.7}
-            className="flex flex-wrap gap-2.5 mb-8 md:mb-10 max-w-2xl"
+            className="grid sm:grid-cols-2 gap-8 md:gap-12 mb-6 md:mb-8 w-full"
           >
-            {[
-              "1+ Years Experience",
-              "10+ Projects Built",
-              "Building Gnanadhan"
-            ].map((meta, i) => (
-              <span key={i} className="px-3.5 py-2 rounded-lg border border-stone-200 dark:border-stone-800 bg-white/40 dark:bg-stone-900/40 backdrop-blur text-xs font-medium tracking-wide text-stone-600 dark:text-stone-400">
-                {meta}
-              </span>
-            ))}
+            {/* Highlights */}
+            <div>
+              <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-stone-400 dark:text-stone-500 mb-4">Highlights</p>
+              <ul className="space-y-3">
+                {[
+                  "1+ Years Experience",
+                  "10+ Projects Built",
+                  "Building Gnanadhan"
+                ].map((meta, i) => (
+                  <li key={i} className="flex items-center gap-2.5 text-[14px] text-stone-600 dark:text-stone-400">
+                    <div className="w-1.5 h-1.5 rounded-full bg-amber-600 dark:bg-amber-500/70" />
+                    {meta}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Current Focus */}
+            <div>
+              <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-stone-400 dark:text-stone-500 mb-4">Current Focus</p>
+              <ul className="space-y-3">
+                {['Java Internals', 'System Design', 'Distributed Systems'].map((focus, i) => (
+                  <li key={i} className="flex items-center gap-2.5 text-[14px] text-stone-600 dark:text-stone-400">
+                    <ChevronRight size={14} className="text-amber-600 dark:text-amber-500/70" />
+                    {focus}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </motion.div>
 
-          {/* Current Focus */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             animate="visible"
             custom={0.8}
-            className="mb-8 md:mb-10"
-          >
-            <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-stone-400 dark:text-stone-500 mb-4">Current Focus</p>
-            <ul className="space-y-3">
-              {['Java Internals', 'System Design', 'Distributed Systems'].map((focus, i) => (
-                <li key={i} className="flex items-center gap-2.5 text-[15px] text-stone-600 dark:text-stone-400">
-                  <ChevronRight size={15} className="text-amber-600 dark:text-amber-500/70" />
-                  {focus}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={0.9}
             className="flex flex-wrap gap-4 items-center"
           >
             <Magnetic strength={0.1}>
@@ -208,7 +204,7 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
           animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
           transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="hidden md:flex order-2 justify-center md:justify-end"
+          className="hidden md:flex order-2 justify-center"
         >
           <Magnetic strength={0.05}>
             <div className="relative group p-4">
@@ -216,12 +212,7 @@ export function Hero() {
                 <img
                   src="/profile.jpeg"
                   alt={`Portrait of ${siteData.nickname}`}
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05] dark:hidden"
-                />
-                <img
-                  src="/whiteshirt-profile.jpeg"
-                  alt={`Portrait of ${siteData.nickname}`}
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05] hidden dark:block"
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]"
                 />
               </div>
               {/* Decorative accent corners */}

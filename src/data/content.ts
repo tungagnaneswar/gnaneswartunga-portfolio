@@ -1,10 +1,11 @@
 export const siteData = {
-  name: 'Building reliable software.',
+  name: 'Engineering robust systems.',
   nickname: 'Gnaneswar Tunga',
-  title: 'Focused on Java, Spring Boot and understanding production-scale systems.',
-  pitch: 'Building reliable software.',
+  title: "I'm a Full-Stack Engineer based in Hyderabad, specializing in Java, Spring Boot, and React. I architect scalable databases, design clean APIs, and build reliable production applications.",
+  pitch: 'Engineering robust systems.',
   location: 'Hyderabad, India',
   email: 'tungagnaneswar12@gmail.com',
+  phone: '+91 6301508340',
   github: 'https://github.com/tungagnaneswar',
   linkedin: 'https://linkedin.com/in/gnaneswartunga',
   resume: 'https://drive.google.com/file/d/1KvWJommSnJOZt-rmG0T6Iw8F5u-2nqry/view?usp=sharing',
@@ -42,7 +43,7 @@ export type Project = {
   title: string;
   number: string;
   description: string;
-  badge: 'PROFESSIONAL' | 'PERSONAL';
+  badge: 'PROFESSIONAL' | 'ENGINEERING PROJECT';
   tags: string[];
   github?: string;
   demo?: string;
@@ -56,27 +57,24 @@ export type Project = {
   features?: string[];
 };
 
-export const currentlyBuilding = {
-  title: 'Gnanadhan',
-  description: 'I started Gnanadhan because I wanted students to understand concepts clearly instead of memorizing interview answers and random notes.',
-  status: 'Early Development',
-  target: 'Version 1.0 in future.'
-};
+
 
 export const projects: Project[] = [
   {
-    title: 'Property Management Platform',
+    title: 'Schema Vault - A Database Schema Drift Detection Platform',
     number: '01',
-    badge: 'PROFESSIONAL',
-    description: 'Implemented production modules including real-time notifications, PostgreSQL schema design and responsive React interfaces.',
-    tags: ['React.js', 'Spring Boot', 'PostgreSQL', 'Java'],
+    badge: 'ENGINEERING PROJECT',
+    description: 'Developed a comparison engine to detect database schema drift between local and production environments, solving the problem of silent deployment bugs.',
+    tags: ['Java', 'Spring Boot', 'Docker', 'PostgreSQL', 'React', 'TypeScript'],
+    github: 'https://github.com/tungagnaneswar/schema-vault-backend',
+    demo: 'https://schema-vault-kappa.vercel.app/',
     featured: true,
-    features: [
-      'Designed PostgreSQL schemas and robust REST APIs.',
-      'Built production-ready React interfaces with reusable components.',
-      'Developed comprehensive role-based access control modules.',
-      'Optimized backend queries for high-volume tenant data.'
-    ]
+    caseStudy: {
+      why: 'I repeatedly faced issues keeping local and production databases synced without paying for expensive tools.',
+      problem: 'Database schema drift causes silent bugs that are hard to trace and break production deployments.',
+      challenge: 'Writing a reliable comparison engine that parses SQL structure and accurately detects missing columns, indexes, and constraints without false positives.',
+      learned: 'Deepened my understanding of PostgreSQL internals, metadata tables, and writing robust parsing logic in Spring Boot.'
+    }
   },
   {
     title: 'Fleet Management System',
@@ -86,48 +84,26 @@ export const projects: Project[] = [
     tags: ['Node.js', 'Express.js', 'React', 'TypeScript', 'Socket.IO', 'PostgreSQL'],
     featured: true,
     features: [
-      'Implemented Socket.IO real-time notifications, replacing legacy polling.',
+      'Implemented Kanban Board for task management using drag and drop functionality',
       'Designed scalable PostgreSQL database schemas and API endpoints.',
       'Built responsive interfaces for live vehicle tracking and status updates.',
-      'Integrated role-based access for fleet managers and administrators.'
+      'Integrated role-based access for fleet managers and administrators.',
+      'Optimized backend queries for high-volume vehicle data.'
     ]
   },
   {
-    title: 'Milk Manager',
+    title: 'Property Management Platform',
     number: '03',
-    badge: 'PERSONAL',
-    description: 'Built for my father\'s dairy business to replace manual paper tracking. Provides a mobile-friendly dashboard for daily milk logging and automated monthly billing reports.',
-    tags: ['React', 'TypeScript', 'Supabase', 'Tailwind CSS'],
-    github: '#',
-    demo: '#',
+    badge: 'PROFESSIONAL',
+    description: 'Implemented production modules including real-time notifications, PostgreSQL schema design and responsive React interfaces.',
+    tags: ['Node.js', 'Express.js', 'React', 'TypeScript', 'Socket.IO', 'PostgreSQL'],
     featured: true,
     features: [
-      'Customer management module',
-      'Daily milk tracking dashboard',
-      'Automated monthly report generation',
-      'Real-time income calculations'
-    ],
-    caseStudy: {
-      why: 'My father was managing his dairy business on paper, which made monthly billing and tracking incredibly time-consuming and error-prone.',
-      problem: 'Needed a simple, mobile-friendly way to log daily milk quantities per customer and instantly generate accurate end-of-month billing reports.',
-      challenge: 'Designing an intuitive UI that non-technical users (like my father) could easily use every day without friction.',
-      learned: 'Software is most powerful when it solves real, tangible problems for real people. Empathy is the most important engineering skill.'
-    }
-  },
-  {
-    title: 'Schema Vault',
-    number: '04',
-    badge: 'PERSONAL',
-    description: 'Developed a comparison engine to detect database schema drift between local and production environments, solving the problem of silent deployment bugs.',
-    tags: ['Java', 'Spring Boot', 'Docker', 'PostgreSQL', 'React', 'TypeScript'],
-    github: '#',
-    demo: '#',
-    caseStudy: {
-      why: 'I repeatedly faced issues keeping local and production databases synced without paying for expensive tools.',
-      problem: 'Database schema drift causes silent bugs that are hard to trace and break production deployments.',
-      challenge: 'Writing a reliable comparison engine that parses SQL structure and accurately detects missing columns, indexes, and constraints without false positives.',
-      learned: 'Deepened my understanding of PostgreSQL internals, metadata tables, and writing robust parsing logic in Spring Boot.'
-    }
+      'Implemented Socket.IO real-time notifications, replacing legacy polling.',
+      'Built production-ready React interfaces with reusable components.',
+      'Developed comprehensive role-based access control modules.',
+      'Optimized backend queries for high-volume tenant data.'
+    ]
   }
 ];
 
