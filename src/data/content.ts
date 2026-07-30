@@ -8,14 +8,14 @@ export const siteData = {
   phone: '+91 6301508340',
   github: 'https://github.com/tungagnaneswar',
   linkedin: 'https://linkedin.com/in/gnaneswartunga',
-  resume: 'https://drive.google.com/file/d/1KvWJommSnJOZt-rmG0T6Iw8F5u-2nqry/view?usp=sharing',
+  resume: 'https://drive.google.com/file/d/1TIn20frhUDdzFvttJFf3uzycKEG_aTJh/view?usp=sharing',
 } as const;
 
 export const about = {
   paragraphs: [
     "I'm a full-stack engineer working at eArbor in Hyderabad. I spend my days designing REST APIs, structuring PostgreSQL schemas, and hooking everything up to React frontends.",
     "My journey formally started at Sri Venkateswara Engineering College, followed by intensive full-stack training. Over time, I've grown a deep appreciation for the entire stack — especially the backend. Java, Spring Boot, and Node.js are where I feel most at home.",
-    "I'm currently spending most of my free time learning Java internals, distributed systems, and building Gnanadhan. I enjoy understanding how systems work internally, from JVM behavior to distributed systems.",
+    "I'm currently spending most of my free time learning Java internals, distributed systems, and building Schema Vault. I enjoy understanding how systems work internally, from JVM behavior to distributed systems.",
   ],
 };
 
@@ -34,8 +34,8 @@ export const skills: SkillGroup[] = [
     items: ['Node.js', 'Express.js', 'Docker', 'TypeScript', 'Tailwind CSS', 'MongoDB', 'AWS', 'Git'],
   },
   {
-    category: 'Currently Learning',
-    items: ['System Design', 'Distributed Systems (Raft)', 'GenAI'],
+    category: 'Knowledge',
+    items: ['System Design', 'Distributed Systems (Raft)', 'Generative AI'],
   },
 ];
 

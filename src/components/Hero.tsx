@@ -111,7 +111,7 @@ export function Hero() {
                 {[
                   "1+ Years Experience",
                   "10+ Projects Built",
-                  "Building Gnanadhan"
+                  "Building Schema Vault"
                 ].map((meta, i) => (
                   <li key={i} className="flex items-center gap-2.5 text-[14px] text-stone-600 dark:text-stone-400">
                     <div className="w-1.5 h-1.5 rounded-full bg-amber-600 dark:bg-amber-500/70" />

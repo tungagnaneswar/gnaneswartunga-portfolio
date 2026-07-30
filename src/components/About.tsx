@@ -58,7 +58,7 @@ export function About() {
               { year: '2020–2024', event: 'B.Tech Information Technology' },
               { year: '2024–2025', event: 'Java Full Stack Training @ KodNest' },
               { year: '2025–Present', event: 'Full Stack Engineer @ eArbor' },
-              { year: 'Present', event: 'Building Gnanadhan', isHighlight: true }
+              { year: 'Present', event: 'Building Schema Vault', isHighlight: true }
             ].map((milestone, i) => (
               <div key={i} className="flex flex-col gap-1">
                 <span className="text-[11px] font-bold tracking-widest text-stone-400 dark:text-stone-500">
