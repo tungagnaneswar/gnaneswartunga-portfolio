@@ -1,9 +1,9 @@
 import { skills } from '../data/content';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { motion } from 'framer-motion';
-import { Star, Layers, Sparkles } from 'lucide-react';
+import { Server, Layout, Database, Cpu } from 'lucide-react';
 
-const icons = [Star, Layers, Sparkles];
+const icons = [Server, Layout, Database, Cpu];
 
 export function Skills() {
   const { ref, isVisible } = useScrollReveal<HTMLElement>();
@@ -36,7 +36,7 @@ export function Skills() {
         variants={container}
         initial="hidden"
         animate={isVisible ? 'show' : 'hidden'}
-        className="grid grid-cols-1 md:grid-cols-3 gap-6"
+        className="grid grid-cols-1 md:grid-cols-2 gap-6"
       >
         {skills.map((group, idx) => {
           const Icon = icons[idx % icons.length];
@@ -45,10 +45,10 @@ export function Skills() {
             <motion.div
               key={group.category}
               variants={item}
-              className="bento-card p-8 flex flex-col gap-6"
+              className="bento-card p-8 flex flex-col gap-6 h-full"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-600 dark:text-amber-500">
+                <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-600 dark:text-amber-500 shrink-0">
                   <Icon size={18} />
                 </div>
                 <h3 className="font-serif text-2xl text-stone-900 dark:text-stone-100">
@@ -73,3 +73,4 @@ export function Skills() {
     </section>
   );
 }
+

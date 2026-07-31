@@ -41,7 +41,7 @@ export function Nav() {
             className="font-serif text-2xl text-stone-900 dark:text-stone-50 tracking-tight hover:opacity-70 transition-opacity"
             data-cursor-hover
           >
-            {siteData.nickname}
+            {siteData.name}
             <span className="text-amber-700 dark:text-amber-500">.</span>
           </a>
         </Magnetic>

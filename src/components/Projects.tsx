@@ -1,8 +1,9 @@
 import { projects } from '../data/content';
 import type { Project } from '../data/content';
-import { Code2, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { motion } from 'framer-motion';
+import { GithubIcon } from './icons/BrandIcons';
 
 /* ─── Case Study — amber-bordered aside ────────────────────────────────── */
 function CaseStudyBlock({ caseStudy }: { caseStudy: NonNullable<Project['caseStudy']> }) {
@@ -10,15 +11,23 @@ function CaseStudyBlock({ caseStudy }: { caseStudy: NonNullable<Project['caseStu
     <div className="mt-5 pl-4 border-l-2 border-amber-500/30 dark:border-amber-500/20 space-y-3">
       <div>
         <h4 className="text-[11px] font-bold tracking-widest uppercase text-stone-500 dark:text-stone-500 mb-1.5">
-          Why I built this
+          Problem
         </h4>
         <p className="text-[14.5px] text-stone-600 dark:text-stone-400 leading-[1.7]">
-          {caseStudy.why}
+          {caseStudy.problem}
         </p>
       </div>
       <div>
         <h4 className="text-[11px] font-bold tracking-widest uppercase text-stone-500 dark:text-stone-500 mb-1.5">
-          Technical Challenge
+          Solution
+        </h4>
+        <p className="text-[14.5px] text-stone-600 dark:text-stone-400 leading-[1.7]">
+          {caseStudy.solution}
+        </p>
+      </div>
+      <div>
+        <h4 className="text-[11px] font-bold tracking-widest uppercase text-stone-500 dark:text-stone-500 mb-1.5">
+          Technical Challenges
         </h4>
         <p className="text-[14.5px] text-stone-600 dark:text-stone-400 leading-[1.7]">
           {caseStudy.challenge}
@@ -50,7 +59,7 @@ function ProjectLinks({ project }: { project: Project }) {
           aria-label={`View ${project.title} source on GitHub`}
           className="inline-flex items-center gap-1.5 text-[13px] font-medium text-stone-500 dark:text-stone-500 hover:text-stone-900 dark:hover:text-stone-200 transition-colors"
         >
-          <Code2 size={14} />
+          <GithubIcon size={14} />
           Source
         </a>
       )}
@@ -77,7 +86,7 @@ function FeaturedProject({ project }: { project: Project }) {
   return (
     <motion.article
       ref={ref}
-      className={`card-hover group relative py-6 px-8 sm:py-8 sm:px-10 rounded-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900/50 mb-8 transition-all duration-700 ${
+      className={`card-hover group relative py-6 px-8 sm:py-8 sm:px-10 rounded-xl border border-amber-500/40 dark:border-amber-500/30 bg-white dark:bg-stone-900/50 mb-8 transition-all duration-700 shadow-sm hover:shadow-md ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
       }`}
     >
@@ -88,10 +97,15 @@ function FeaturedProject({ project }: { project: Project }) {
 
       <div className="relative z-10">
         {/* Badge */}
-        <span className="inline-flex items-center gap-1.5 text-[9px] font-bold tracking-[0.15em] uppercase text-stone-500 dark:text-stone-400 mb-4">
-          <span>{project.badge === 'PROFESSIONAL' ? '💼' : '🔬'}</span>
-          {project.badge}
-        </span>
+        <div className="flex items-center gap-2 mb-4 flex-wrap">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-bold tracking-[0.15em] uppercase bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20">
+            ★ FLAGSHIP PROJECT
+          </span>
+          <span className="inline-flex items-center gap-1.5 text-[9px] font-bold tracking-[0.15em] uppercase text-stone-500 dark:text-stone-400">
+            <span>{project.badge === 'PROFESSIONAL' ? '💼' : '🔬'}</span>
+            {project.badge}
+          </span>
+        </div>
 
         {/* Title */}
         <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl text-stone-900 dark:text-stone-50 leading-snug mb-3 group-hover:text-amber-700 dark:group-hover:text-amber-500 transition-colors">
@@ -242,7 +256,7 @@ export function Projects() {
           Projects
         </p>
         <h2 className="font-serif section-heading text-stone-900 dark:text-stone-50">
-          Selected work<span className="text-amber-700 dark:text-amber-500">.</span>
+          Engineering Projects<span className="text-amber-700 dark:text-amber-500">.</span>
         </h2>
       </div>
 

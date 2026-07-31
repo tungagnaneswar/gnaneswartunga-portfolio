@@ -23,16 +23,17 @@ export function Experience() {
           
           <div className="hidden md:block space-y-6 mb-8">
             <p className="text-sm text-stone-500 dark:text-stone-400 leading-relaxed">
-              My professional background primarily involves full-stack development, with a strong focus on distributed backend systems and React-based user interfaces.
+              Building production backend systems using Java, Spring Boot, PostgreSQL, REST APIs, and React while contributing to scalable enterprise applications.
             </p>
             
             <div className="space-y-3 pt-4 border-t border-stone-200 dark:border-stone-800/60">
-              <p className="text-[11px] font-bold tracking-widest uppercase text-stone-400 dark:text-stone-500 mb-2">Achievements</p>
+              <p className="text-[11px] font-bold tracking-widest uppercase text-stone-400 dark:text-stone-500 mb-2">Key Focus</p>
               {[
-                "Implemented Socket.IO notifications, replacing polling entirely",
-                "Designed PostgreSQL schemas and production APIs end-to-end",
-                "Built full-stack applications deployed to production",
-                "Delivered features from schema design to React UI"
+                "Developed REST APIs using Java & Spring Boot",
+                "Designed normalized PostgreSQL database schemas",
+                "Integrated Socket.IO real-time notifications",
+                "Implemented JWT & Role-Based Access Control (RBAC)",
+                "Optimized backend SQL queries for high performance"
               ].map((achievement, i) => (
                 <div key={i} className="flex items-start gap-2 text-sm text-stone-600 dark:text-stone-400">
                   <CheckCircle2 size={16} className="text-amber-600 dark:text-amber-500 shrink-0 mt-0.5" />

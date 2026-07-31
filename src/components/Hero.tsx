@@ -1,7 +1,8 @@
 import { siteData } from '../data/content';
-import { Code2, Link, FileText, ChevronRight, MapPin, Target } from 'lucide-react';
+import { FileText, ChevronRight, MapPin, Target } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Magnetic } from './Magnetic';
+import { GithubIcon, LinkedinIcon } from './icons/BrandIcons';
 
 const sentence = {
   hidden: { opacity: 1 },
@@ -33,7 +34,7 @@ const fadeUp = {
 };
 
 export function Hero() {
-  const titleChars = siteData.name.split('');
+  const words = siteData.title.split(' ');
 
   return (
     <section
@@ -48,12 +49,16 @@ export function Hero() {
             variants={sentence}
             initial="hidden"
             animate="visible"
-            className="hero-heading font-serif leading-[1.05] text-stone-900 dark:text-stone-50 mb-5 overflow-hidden flex flex-wrap"
+            className="hero-heading font-serif leading-[1.1] text-stone-900 dark:text-stone-50 mb-5 flex flex-wrap gap-x-[0.3em] gap-y-1"
           >
-            {titleChars.map((char, index) => (
-              <motion.span key={index} variants={letter} className="inline-block relative">
-                {char === ' ' ? '\u00A0' : char}
-              </motion.span>
+            {words.map((word, wordIdx) => (
+              <span key={wordIdx} className="inline-block whitespace-nowrap">
+                {word.split('').map((char, charIdx) => (
+                  <motion.span key={charIdx} variants={letter} className="inline-block relative">
+                    {char}
+                  </motion.span>
+                ))}
+              </span>
             ))}
           </motion.h1>
 
@@ -68,7 +73,7 @@ export function Hero() {
               <div className="w-48 h-48 sm:w-60 sm:h-60 rounded-[2rem] overflow-hidden ring-1 ring-stone-200 dark:ring-stone-800 shadow-xl shadow-stone-900/5 dark:shadow-none">
                 <img
                   src="/profile.jpeg"
-                  alt={`Portrait of ${siteData.nickname}`}
+                  alt={`Portrait of ${siteData.name}`}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -93,7 +98,7 @@ export function Hero() {
             custom={0.6}
             className="text-base md:text-xl text-stone-600 dark:text-stone-300 leading-relaxed max-w-2xl mb-6 md:mb-8"
           >
-            {siteData.title}
+            {siteData.describe}
           </motion.p>
 
           {/* Two-column Info Section */}
@@ -109,8 +114,10 @@ export function Hero() {
               <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-stone-400 dark:text-stone-500 mb-4">Highlights</p>
               <ul className="space-y-3">
                 {[
-                  "1+ Years Experience",
-                  "10+ Projects Built",
+                  "Production Backend Development",
+                  "REST API Development",
+                  "PostgreSQL Database Design",
+                  "Real-time Applications",
                   "Building Schema Vault"
                 ].map((meta, i) => (
                   <li key={i} className="flex items-center gap-2.5 text-[14px] text-stone-600 dark:text-stone-400">
@@ -125,7 +132,7 @@ export function Hero() {
             <div>
               <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-stone-400 dark:text-stone-500 mb-4">Current Focus</p>
               <ul className="space-y-3">
-                {['Java Internals', 'System Design', 'Distributed Systems'].map((focus, i) => (
+                {['Spring Boot', 'PostgreSQL', 'Backend Engineering'].map((focus, i) => (
                   <li key={i} className="flex items-center gap-2.5 text-[14px] text-stone-600 dark:text-stone-400">
                     <ChevronRight size={14} className="text-amber-600 dark:text-amber-500/70" />
                     {focus}
@@ -168,9 +175,13 @@ export function Hero() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="GitHub profile"
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-stone-100 dark:bg-stone-800 text-stone-500 dark:text-stone-400 hover:text-amber-700 dark:hover:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-500/10 transition-colors duration-300"
+                  title="GitHub"
+                  className="group relative w-10 h-10 flex items-center justify-center rounded-full bg-stone-100 dark:bg-stone-800 text-stone-500 dark:text-stone-400 hover:text-amber-700 dark:hover:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-500/10 transition-colors duration-300"
                 >
-                  <Code2 size={18} />
+                  <GithubIcon size={18} />
+                  <span className="absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 text-[11px] font-medium text-stone-100 dark:text-stone-900 bg-stone-900/90 dark:bg-stone-100/90 rounded-md opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none whitespace-nowrap shadow-md z-20 translate-y-1 group-hover:translate-y-0">
+                    GitHub
+                  </span>
                 </a>
               </Magnetic>
               <Magnetic strength={0.1}>
@@ -179,9 +190,13 @@ export function Hero() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn profile"
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-stone-100 dark:bg-stone-800 text-stone-500 dark:text-stone-400 hover:text-amber-700 dark:hover:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-500/10 transition-colors duration-300"
+                  title="LinkedIn"
+                  className="group relative w-10 h-10 flex items-center justify-center rounded-full bg-stone-100 dark:bg-stone-800 text-stone-500 dark:text-stone-400 hover:text-amber-700 dark:hover:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-500/10 transition-colors duration-300"
                 >
-                  <Link size={18} />
+                  <LinkedinIcon size={18} />
+                  <span className="absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 text-[11px] font-medium text-stone-100 dark:text-stone-900 bg-stone-900/90 dark:bg-stone-100/90 rounded-md opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none whitespace-nowrap shadow-md z-20 translate-y-1 group-hover:translate-y-0">
+                    LinkedIn
+                  </span>
                 </a>
               </Magnetic>
               <Magnetic strength={0.1}>
@@ -190,9 +205,13 @@ export function Hero() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Download resume"
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-stone-100 dark:bg-stone-800 text-stone-500 dark:text-stone-400 hover:text-amber-700 dark:hover:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-500/10 transition-colors duration-300"
+                  title="Download Resume"
+                  className="group relative w-10 h-10 flex items-center justify-center rounded-full bg-stone-100 dark:bg-stone-800 text-stone-500 dark:text-stone-400 hover:text-amber-700 dark:hover:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-500/10 transition-colors duration-300"
                 >
                   <FileText size={18} />
+                  <span className="absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 text-[11px] font-medium text-stone-100 dark:text-stone-900 bg-stone-900/90 dark:bg-stone-100/90 rounded-md opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none whitespace-nowrap shadow-md z-20 translate-y-1 group-hover:translate-y-0">
+                    Download Resume
+                  </span>
                 </a>
               </Magnetic>
             </div>
@@ -211,7 +230,7 @@ export function Hero() {
               <div className="w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-[2rem] overflow-hidden ring-1 ring-stone-200 dark:ring-stone-800 transition-all duration-700 group-hover:ring-amber-500/50 shadow-2xl shadow-stone-900/5 dark:shadow-none">
                 <img
                   src="/profile.jpeg"
-                  alt={`Portrait of ${siteData.nickname}`}
+                  alt={`Portrait of ${siteData.name}`}
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]"
                 />
               </div>
