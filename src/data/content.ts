@@ -1,7 +1,7 @@
 export const siteData = {
   name: 'Gnaneswar Tunga',
-  title: 'Java Backend Engineer building reliable software.',
-  describe: 'Java Backend Engineer with 1+ year of professional experience developing Spring Boot REST APIs, PostgreSQL databases, and production-ready backend applications.',
+  title: 'Java Full-Stack Engineer building reliable software.',
+  describe: 'Java Full-Stack Engineer with 1+ year of professional experience developing Spring Boot REST APIs, PostgreSQL databases, and production-ready backend applications.',
   pitch: 'Building scalable backend systems with Java.',
   location: 'Hyderabad, India',
   email: 'tungagnaneswar12@gmail.com',
